@@ -24,9 +24,8 @@ RUN cd /var/www/owl;curl -sS https://getcomposer.org/installer | php
 RUN cd /var/www/owl;php composer.phar install
 
 
-RUN cd /var/www/owl; yes | php artisan migrate --package=cartalyst/sentry
 RUN cd /var/www/owl; yes | php artisan migrate
-RUN cd /var/www/owl; yes | php artisan db:seed
+RUN cd /var/www/owl; yes | php artisan vendor:publish --provider="Owl\Providers\TwitterBootstrapServiceProvider" 
 
 RUN chown -R nginx:nginx /var/www/owl 
 
