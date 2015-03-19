@@ -24,8 +24,8 @@ RUN cd /var/www/owl;curl -sS https://getcomposer.org/installer | php
 RUN cd /var/www/owl;php composer.phar install
 
 
-RUN cd /var/www/owl; yes | php artisan migrate
-RUN cd /var/www/owl; yes | php artisan vendor:publish --provider="Owl\Providers\TwitterBootstrapServiceProvider" 
+RUN cd /var/www/owl; php artisan vendor:publish --provider="Owl\Providers\TwitterBootstrapServiceProvider" --force
+RUN cd /var/www/owl; php artisan migrate --force
 
 RUN chown -R nginx:nginx /var/www/owl 
 
@@ -34,7 +34,7 @@ RUN sed -i 's/apache/nginx/g' /opt/remi/php56/root/etc/php-fpm.d/www.conf
 ADD default.conf /etc/nginx/conf.d/default.conf
 ADD run.sh /usr/bin/run.sh
 
-EXPOSE 80
+EXPOSE 8000
 # CMD ["/etc/init.d/php56-fpm start"]
 CMD ["/usr/bin/run.sh"]
 
