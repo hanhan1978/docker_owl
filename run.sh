@@ -1,2 +1,2 @@
 #!/bin/bash
-/opt/remi/php56/root/usr/sbin/php-fpm -D & /usr/sbin/nginx -g 'daemon off;'
+/usr/bin/hhvm --mode daemon --config /etc/hhvm/server.ini & /usr/sbin/nginx -g 'daemon off;'
